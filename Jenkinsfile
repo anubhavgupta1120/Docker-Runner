@@ -13,6 +13,11 @@ pipeline {
         stage('Run Test-Suite') {
             steps {
                 sh "BROWSER=$params.Browser TEST_SUITE=$params.TestSuite docker-compose -f Test-Suite.yaml up"
+                script{
+                    if(fileExists('Docker-Output/testng-failed.xml')){
+                        error('failed tests found')
+                    }
+                }
             }
         }
     }
@@ -20,7 +25,7 @@ pipeline {
         always {
             sh "docker-compose -f Test-Suite.yaml down"
             sh "docker-compose -f Grid.yaml down"
-            archiveArtifacts artifacts: "Docker-Output/TestReport.html", followSymlinks: false
+            archiveArtifacts artifacts: "Docker-Output/ExtentReport/TestReport.html", followSymlinks: false
         }
         cleanup {
         /* clean up tmp directory */

@@ -8,4 +8,4 @@ services:
       - THREAD_COUNT=5
       - TEST_SUITE
     volumes:
-      - ./Docker-Output:/home/Selenium-Docker/test-output/ExtentReport/
+      - ./Docker-Output:/home/Selenium-Docker/test-output/
