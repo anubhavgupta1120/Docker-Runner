@@ -3,9 +3,9 @@ services:
   test-suite:
     image: anubhavgupta11/selenium-docker
     environment:
-      - BROWSER=${BROWSER:-Chrome}
+      - BROWSER
       - HUB_HOST=hub
       - THREAD_COUNT=2
-      - TEST_SUITE=${TEST_SUITE:-QAEnv.xml}
+      - TEST_SUITE
     volumes:
       - ./Docker-Output/${TEST_SUITE}/${BROWSER}:/home/Selenium-Docker/test-output/ExtentReport/
