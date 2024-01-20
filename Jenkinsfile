@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Run Test-Suite') {
             steps {
-                sh "BROWSER=${params.Browser} TEST_SUITE=${params.Test-Suite} docker-compose -f Test-Suite.yaml up"
+                sh "BROWSER=$${params.Browser} TEST_SUITE=$${params.Test-Suite} docker-compose -f Test-Suite.yaml up"
             }
         }
     }
