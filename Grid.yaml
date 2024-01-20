@@ -8,25 +8,13 @@ services:
     depends_on:
       - hub
     deploy:
-      replicas: 0
-    environment:
-      - SE_EVENT_BUS_HOST=hub
-      - SE_EVENT_BUS_PUBLISH_PORT=4442
-      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
-      - SE_NODE_MAX_SESSIONS=2
-      - SE_VNC_NO_PASSWORD=1
+      replicas: 2
+    env_file: .env
   firefox:
     image: seleniarm/node-firefox:4.16
     shm_size: 2gb
     depends_on:
       - hub
     deploy:
-      replicas: 0
-    environment:
-      - SE_EVENT_BUS_HOST=hub
-      - SE_EVENT_BUS_PUBLISH_PORT=4442
-      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
-      - SE_NODE_MAX_SESSIONS=2
-      - SE_VNC_NO_PASSWORD=1
+      replicas: 2
+    env_file: .env
