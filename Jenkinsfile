@@ -2,7 +2,7 @@ pipeline {
     agent any
     parameters {
         choice(name: 'Browser', choices: ['Chrome', 'Firefox'], description: 'Select the Browser')
-        choice(name: 'TestSuite', choices: ['FlightBooking.xml', 'VendorPortal.xml', 'QAEnv.xml'], description: 'Select the Test-Suite')
+        choice(name: 'TestSuite', choices: ['FlightBooking', 'VendorPortal', 'QAEnv'], description: 'Select the Test-Suite')
     }
     stages {
         stage('Start Grid') {
@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Run Test-Suite') {
             steps {
-                sh "BROWSER=$params.Browser TEST_SUITE=$params.TestSuite docker-compose -f Test-Suite.yaml up"
+                sh "BROWSER=$params.Browser TEST_SUITE=$params.TestSuite.xml docker-compose -f Test-Suite.yaml up"
             }
         }
     }
