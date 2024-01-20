@@ -12,15 +12,15 @@ pipeline {
         }
         stage('Run Test-Suite') {
             steps {
-                sh "BROWSER=${params.Browser} TEST_SUITE=${params.Test-Suite}.xml docker-compose -f Test-Suite.yaml up"
+                echo "BROWSER=${params.Browser} TEST_SUITE=${params.Test-Suite}.xml docker-compose -f Test-Suite.yaml up"
             }
         }
     }
     post {
         always {
-            sh "docker-compose -f Test-Suite.yaml down"
+            // sh "docker-compose -f Test-Suite.yaml down"
             sh "docker-compose -f Grid.yaml down"
-            archiveArtifacts artifacts: "Docker-Output/${params.Test-Suite}/${params.Browser}/TestReport.html", followSymlinks: false
+            // archiveArtifacts artifacts: "Docker-Output/${params.Test-Suite}/${params.Browser}/TestReport.html", followSymlinks: false
         }
         cleanup {
         /* clean up tmp directory */
