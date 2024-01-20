@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Run Test-Suite') {
             steps {
-                sh "BROWSER=$params.Browser TEST_SUITE=$params.TestSuite docker-compose -f Test-Suite.yaml up"
+                sh "BROWSER=$params.Browser TEST_SUITE=$params.TestSuite docker-compose -f Test-Suite.yaml up --pull=always"
                 script{
                     if(fileExists('Docker-Output/testng-failed.xml')){
                         error('failed tests found')
